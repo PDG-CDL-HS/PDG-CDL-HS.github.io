@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cause and Effect Matching – Reconstruction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8fafc;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .match-pair {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #d1d5db;
+    }
+
+    .cause {
+      flex: 1;
+      font-weight: bold;
+      color: #1e293b;
+    }
+
+    .dropzone {
+      flex: 1;
+      min-height: 50px;
+      background-color: #e2e8f0;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 10px;
+      margin-left: 20px;
+      text-align: center;
+    }
+
+    .effect {
+      background-color: #cbd5e1;
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: grab;
+      display: inline-block;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+
+    .correct {
+      background-color: #a7f3d0 !important;
+      border: 2px solid #10b981;
+    }
+
+    .incorrect {
+      background-color: #fecaca !important;
+      border: 2px solid #ef4444;
+    }
+
+    .effect:active {
+      cursor: grabbing;
+    }
+
+    #effects-pool {
+      margin-top: 30px;
+      padding: 10px;
+      background-color: #f1f5f9;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔁 Match the Cause to Its Effect: Reconstruction After the Civil War</h1>
+  <p><em>Drag the correct effect from the pool to the matching cause. Feedback will highlight correct and incorrect matches.</em></p>
+
+  <!-- Matching Pairs -->
+  <div class="match-pair">
+    <div class="cause">1. The Thirteenth Amendment abolished slavery</div>
+    <div class="dropzone" data-answer="African Americans gained legal freedom"></div>
+  </div>
+
+  <div class="match-pair">
+    <div class="cause">2. White southern resistance to Reconstruction policies</div>
+    <div class="dropzone" data-answer="Rise of white-hooded violence (KKK)"></div>
+  </div>
+
+  <div class="match-pair">
+    <div class="cause">3. Political conflict over Reconstruction approaches</div>
+    <div class="dropzone" data-answer="Presidential impeachment"></div>
+  </div>
+
+  <div class="match-pair">
+    <div class="cause">4. Beliefs that freedmen could not self-govern</div>
+    <div class="dropzone" data-answer="Freedmen faced racist opposition and restricted rights"></div>
+  </div>
+
+  <div class="match-pair">
+    <div class="cause">5. Northern fatigue toward ongoing Southern issues</div>
+    <div class="dropzone" data-answer="Weakening support for federal intervention in the South"></div>
+  </div>
+
+  <!-- Effect Pool -->
+  <div id="effects-pool">
+    <div class="effect" draggable="true" id="e1">Rise of white-hooded violence (KKK)</div>
+    <div class="effect" draggable="true" id="e2">African Americans gained legal freedom</div>
+    <div class="effect" draggable="true" id="e3">Presidential impeachment</div>
+    <div class="effect" draggable="true" id="e4">Freedmen faced racist opposition and restricted rights</div>
+    <div class="effect" draggable="true" id="e5">Weakening support for federal intervention in the South</div>
+  </div>
+
+  <script>
+    let draggedItem = null;
+
+    document.querySelectorAll('.effect').forEach(effect => {
+      effect.addEventListener('dragstart', e => {
+        draggedItem = e.target;
+      });
+    });
+
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', e => e.preventDefault());
+
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        if (draggedItem) {
+          // Check correctness
+          const correctAnswer = zone.getAttribute('data-answer');
+          if (draggedItem.textContent.trim() === correctAnswer.trim()) {
+            zone.innerHTML = '';
+            zone.appendChild(draggedItem);
+            draggedItem.classList.add('correct');
+            draggedItem.setAttribute('draggable', false);
+          } else {
+            draggedItem.classList.add('incorrect');
+            setTimeout(() => {
+              draggedItem.classList.remove('incorrect');
+            }, 1000);
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
