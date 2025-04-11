@@ -2,151 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Cause and Effect Matching – Reconstruction</title>
+  <title>Dihybrid Punnett Square</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8fafc;
+      background-color: #f9fafb;
       padding: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
 
     h1 {
-      font-size: 1.4rem;
-      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.8rem;
     }
 
-    .match-pair {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 10px;
-      border-bottom: 1px solid #d1d5db;
-    }
-
-    .cause {
-      flex: 1;
-      font-weight: bold;
-      color: #1e293b;
-    }
-
-    .dropzone {
-      flex: 1;
-      min-height: 50px;
-      background-color: #e2e8f0;
-      border: 2px dashed #94a3b8;
-      border-radius: 8px;
-      padding: 10px;
-      margin-left: 20px;
+    p {
       text-align: center;
     }
 
-    .effect {
-      background-color: #cbd5e1;
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 8px;
-      cursor: grab;
-      display: inline-block;
-      font-size: 0.95rem;
-      user-select: none;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
     }
 
-    .correct {
-      background-color: #a7f3d0 !important;
-      border: 2px solid #10b981;
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px;
+      text-align: center;
+      vertical-align: top;
     }
 
-    .incorrect {
-      background-color: #fecaca !important;
-      border: 2px solid #ef4444;
+    th {
+      background-color: #e0f2fe;
     }
 
-    .effect:active {
-      cursor: grabbing;
+    select {
+      width: 100%;
+      margin-top: 5px;
+      padding: 6px;
+      font-size: 0.9rem;
     }
 
-    #effects-pool {
+    .phenotype-img {
+      margin-top: 8px;
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 6px;
+      border: 1px solid #94a3b8;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .legend {
       margin-top: 30px;
-      padding: 10px;
-      background-color: #f1f5f9;
-      border: 2px dashed #cbd5e1;
-      border-radius: 12px;
+      padding: 15px;
+      background-color: #eef2ff;
+      border-radius: 8px;
+    }
+
+    .legend ul {
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>🔁 Match the Cause to Its Effect: Reconstruction After the Civil War</h1>
-  <p><em>Drag the correct effect from the pool to the matching cause. Feedback will highlight correct and incorrect matches.</em></p>
+  <h1>🌱 Dihybrid Punnett Square</h1>
+  <p>Select the <strong>genotype</strong> and match it to the correct <strong>phenotype image</strong> for each cell.</p>
 
-  <!-- Matching Pairs -->
-  <div class="match-pair">
-    <div class="cause">1. The Thirteenth Amendment abolished slavery</div>
-    <div class="dropzone" data-answer="African Americans gained legal freedom"></div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Gametes</th>
+        <th>YR</th>
+        <th>Yr</th>
+        <th>yR</th>
+        <th>yr</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Repeat this block for each row: YR, Yr, yR, yr -->
+      <!-- Row: YR -->
+      <tr>
+        <th>YR</th>
+        <!-- Four columns -->
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+      </tr>
 
-  <div class="match-pair">
-    <div class="cause">2. White southern resistance to Reconstruction policies</div>
-    <div class="dropzone" data-answer="Rise of white-hooded violence (KKK)"></div>
-  </div>
+      <!-- Row: Yr -->
+      <tr>
+        <th>Yr</th>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+      </tr>
 
-  <div class="match-pair">
-    <div class="cause">3. Political conflict over Reconstruction approaches</div>
-    <div class="dropzone" data-answer="Presidential impeachment"></div>
-  </div>
+      <!-- Row: yR -->
+      <tr>
+        <th>yR</th>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+      </tr>
 
-  <div class="match-pair">
-    <div class="cause">4. Beliefs that freedmen could not self-govern</div>
-    <div class="dropzone" data-answer="Freedmen faced racist opposition and restricted rights"></div>
-  </div>
+      <!-- Row: yr -->
+      <tr>
+        <th>yr</th>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+        <td>${cellContent()}</td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="match-pair">
-    <div class="cause">5. Northern fatigue toward ongoing Southern issues</div>
-    <div class="dropzone" data-answer="Weakening support for federal intervention in the South"></div>
-  </div>
-
-  <!-- Effect Pool -->
-  <div id="effects-pool">
-    <div class="effect" draggable="true" id="e1">Rise of white-hooded violence (KKK)</div>
-    <div class="effect" draggable="true" id="e2">African Americans gained legal freedom</div>
-    <div class="effect" draggable="true" id="e3">Presidential impeachment</div>
-    <div class="effect" draggable="true" id="e4">Freedmen faced racist opposition and restricted rights</div>
-    <div class="effect" draggable="true" id="e5">Weakening support for federal intervention in the South</div>
+  <div class="legend">
+    <h3>Legend</h3>
+    <ul>
+      <li><strong>Y</strong> = Yellow allele, <strong>y</strong> = Green allele</li>
+      <li><strong>R</strong> = Round allele, <strong>r</strong> = Wrinkled allele</li>
+      <li><strong>Phenotype Images:</strong></li>
+      <ul>
+        <li><code>yellow-round.png</code></li>
+        <li><code>yellow-wrinkled.png</code></li>
+        <li><code>green-round.png</code></li>
+        <li><code>green-wrinkled.png</code></li>
+      </ul>
+    </ul>
   </div>
 
   <script>
-    let draggedItem = null;
+    // Fill each cell with a consistent HTML structure
+    function cellContent() {
+      return `
+        <label>Genotype:</label>
+        <select>
+          <option>--</option>
+          <option>YYRR</option>
+          <option>YyRR</option>
+          <option>YYRr</option>
+          <option>YyRr</option>
+          <option>YYrr</option>
+          <option>Yyrr</option>
+          <option>yyRR</option>
+          <option>yyRr</option>
+          <option>yyrr</option>
+        </select>
 
-    document.querySelectorAll('.effect').forEach(effect => {
-      effect.addEventListener('dragstart', e => {
-        draggedItem = e.target;
+        <label>Phenotype:</label>
+        <select onchange="updateImage(this)">
+          <option value="">Select...</option>
+          <option value="yellow-round.png">Yellow Round</option>
+          <option value="yellow-wrinkled.png">Yellow Wrinkled</option>
+          <option value="green-round.png">Green Round</option>
+          <option value="green-wrinkled.png">Green Wrinkled</option>
+        </select>
+
+        <img class="phenotype-img" alt="" />
+      `;
+    }
+
+    // On page load, fill all table cells with content
+    window.onload = function () {
+      const cells = document.querySelectorAll("td");
+      cells.forEach(cell => {
+        cell.innerHTML = cellContent();
       });
-    });
+    };
 
-    document.querySelectorAll('.dropzone').forEach(zone => {
-      zone.addEventListener('dragover', e => e.preventDefault());
-
-      zone.addEventListener('drop', e => {
-        e.preventDefault();
-        if (draggedItem) {
-          // Check correctness
-          const correctAnswer = zone.getAttribute('data-answer');
-          if (draggedItem.textContent.trim() === correctAnswer.trim()) {
-            zone.innerHTML = '';
-            zone.appendChild(draggedItem);
-            draggedItem.classList.add('correct');
-            draggedItem.setAttribute('draggable', false);
-          } else {
-            draggedItem.classList.add('incorrect');
-            setTimeout(() => {
-              draggedItem.classList.remove('incorrect');
-            }, 1000);
-          }
-        }
-      });
-    });
+    // Update phenotype image on selection
+    function updateImage(selectElement) {
+      const img = selectElement.parentElement.querySelector("img");
+      img.src = selectElement.value;
+      img.alt = selectElement.options[selectElement.selectedIndex].text;
+    }
   </script>
 
 </body>
 </html>
+
