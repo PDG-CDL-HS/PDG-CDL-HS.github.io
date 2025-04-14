@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🌍 Demographic Transition Model: Drag & Drop Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #f9fbe7);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2e7d32;
+    }
+    .header-img {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .reflection-box {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #f1f8e9;
+      border: 2px solid #aed581;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1em;
+    }
+    .reflection-box textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 1em;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      background-color: #ffffff;
+    }
+    .instructions {
+      text-align: center;
+      margin: 20px auto;
+      font-size: 1.1em;
+    }
+    .drop-zone {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .stage {
+      position: relative;
+      background-color: #ffffff;
+      border: 3px dashed #aed581;
+      border-radius: 15px;
+      width: 250px;
+      min-height: 140px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: border-color 0.3s;
+    }
+    .stage h3 {
+      margin: 0 0 10px;
+      font-size: 1.1em;
+      color: #33691e;
+    }
+    .stage.correct-drop::after {
+      content: '✅';
+      font-size: 1.2em;
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      color: #2e7d32;
+    }
+    .stage.highlight {
+      border-color: #81c784 !important;
+      background-color: #f1f8e9;
+      animation: pulse 0.5s ease-in-out;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(76,175,80,0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(76,175,80,0); }
+      100% { box-shadow: 0 0 0 0 rgba(76,175,80,0); }
+    }
+    .draggables {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .item {
+      background-color: #fff59d;
+      border: 2px solid #fbc02d;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: grab;
+      font-size: 0.95em;
+      max-width: 250px;
+      transition: all 0.3s ease-in-out;
+    }
+    .item.correct {
+      background-color: #c8e6c9;
+      border-color: #2e7d32;
+    }
+    .item.incorrect {
+      background-color: #ffcdd2;
+      border-color: #c62828;
+      animation: shake 0.3s ease-in-out;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+
+    .quiz-question {
+        margin: 0 auto 30px;
+        padding: 20px;
+        max-width: 600px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        text-align: left;
+        }
+        .quiz-question p {
+        margin-bottom: 10px;
+        }
+        .quiz-question label {
+        display: block;
+        margin: 8px 0;
+        font-size: 1em;
+        cursor: pointer;
+        }
+
+
+  </style>
+</head>
+<body>
+
+    <h1>🌍 Demographic Transition Model</h1>
+<p style="text-align: center;" > The demographic transition model (DTM) is a theory involving the relationship between crude birth rates, death, rates, and economic development. <br>Examine the visual representation of the model below. Then complete the following activities to strengthen your understading of the DTM.
+  </p>
+    <!-- Visual Diagram -->
+    <img 
+      src="https://content.macmillan-learning.com/cms-nga/7542f06f49c1faacad1e0828ffdd88caa2559a49/Hildebrhgap1e_un0210_01_225.png" 
+      alt="Demographic Transition Model Chart" 
+      width = "800"
+      height = "auto"
+      class="header-img" 
+    />
+    
+    <!-- Reflection Prompt -->
+    <div class="reflection-box">
+      <label for="studentReflection">
+        <H2 style="text-align: center;">📝 In Your Own Words:</strong> </H2><br>
+        Examine the Demographic Transition Model above. In your own words, explain what is happening throughout the stages. What patterns do you notice?
+      </label><br>
+      <textarea id="studentReflection" rows="10" placeholder="Type your response here..."></textarea>
+    </div>
+    
+    <!-- Instructions -->
+    <div class="instructions">
+      <H2>Matching: </H2>
+        <p>Match each description to the correct stage of the demographic transition model.<br>
+      </p>
+    </div>
+    <div class="drop-zone">
+        <div class="stage" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h3>Stage 1: High Stationary</h3>
+        </div>
+        <div class="stage" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h3>Stage 2: Early Expanding</h3>
+        </div>
+        <div class="stage" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h3>Stage 3: Late Expanding</h3>
+        </div>
+        <div class="stage" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h3>Stage 4: Low Stationary</h3>
+        </div>
+        <div class="stage" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+          <h3>Stage 5: Natural Decrease</h3>
+        </div>
+      </div>
+      
+      <div class="draggables" ondrop="drop(event, this)" ondragover="allowDrop(event)">
+        <div class="item" id="item1" draggable="true" ondragstart="drag(event)">Birth and death rates are both high; little population growth</div>
+        <div class="item" id="item2" draggable="true" ondragstart="drag(event)">Death rate drops rapidly due to sanitation and medicine; population grows fast</div>
+        <div class="item" id="item3" draggable="true" ondragstart="drag(event)">Birth rates start to decline; rate of natural increase slows</div>
+        <div class="item" id="item4" draggable="true" ondragstart="drag(event)">Birth and death rates are both low; population growth stabilizes</div>
+        <div class="item" id="item5" draggable="true" ondragstart="drag(event)">Birth rates fall below death rates; population starts to decline</div>
+        <div class="item" id="item6" draggable="true" ondragstart="drag(event)">Stage experienced by preindustrial farming societies</div>
+        <div class="item" id="item7" draggable="true" ondragstart="drag(event)">Seen in countries like Japan and Germany today</div>
+        <div class="item" id="item8" draggable="true" ondragstart="drag(event)">Stage many developing countries are currently in</div>
+        <div class="item" id="item9" draggable="true" ondragstart="drag(event)">Immigration may offset population decline</div>
+      </div>
+      <script>
+        const correctAnswers = {
+          'Stage 1': ['item1', 'item6'],
+          'Stage 2': ['item2'],
+          'Stage 3': ['item3', 'item8'],
+          'Stage 4': ['item4'],
+          'Stage 5': ['item5', 'item7', 'item9']
+        };
+      
+        const correctSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
+        const incorrectSound = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
+      
+        function allowDrop(ev) {
+          ev.preventDefault();
+        }
+      
+        function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.id);
+        }
+      
+        function drop(ev, el) {
+          ev.preventDefault();
+          const data = ev.dataTransfer.getData("text");
+          const item = document.getElementById(data);
+          if (item && el !== item.parentElement) {
+            el.appendChild(item);
+            validateItem(el, item);
+          }
+        }
+      
+        function validateItem(container, item) {
+          const stageHeader = container.querySelector('h3');
+          if (!stageHeader) return;
+          const stage = stageHeader.innerText.split(':')[0].trim(); // Gets "Stage 1"
+
+      
+          // Reset classes
+          item.classList.remove('correct', 'incorrect');
+          container.classList.remove('highlight', 'correct-drop');
+      
+          // Validate match
+          if (correctAnswers[stage] && correctAnswers[stage].includes(item.id)) {
+            item.classList.add('correct');
+            container.classList.add('highlight', 'correct-drop');
+            correctSound.play();
+          } else {
+            item.classList.add('incorrect');
+            incorrectSound.play();
+          }
+        }
+      </script>
+      <div class="quiz">
+        <h2 style="text-align: center;">📘 Check Your Understanding: </h2>
+        <p style="text-align: center;"> Answer all of the questions below to check your understanding. If you need help, refer to the activities above. </p>
+        <div id="progressBar" style="text-align:center; margin-bottom: 20px; font-size: 1.1em;">
+            ✅ Questions Correct: <span id="progressCount">0</span> / 10
+          </div>
+          
+        <!-- Quiz questions (1-10) -->
+        <div id="quiz-container"></div>
+      
+        <p id="quizScore" style="text-align:center; font-weight:bold; font-size:1.2em;"></p>
+        <div id="confetti" style="display:none; text-align:center; font-size:2em; margin-top:20px;">🎉 Congratulations! You got all answers right! 🎉</div>
+        <div style="text-align:center; margin-top:20px;">
+          <button onclick="resetQuiz()">🔄 Reset Questions</button>
+        </div>
+      </div>
+      
+      <script>
+        const quizQuestions = [
+          {
+            question: "1. Which stage shows both high birth and death rates with little growth?",
+            options: ["Stage 1", "Stage 2", "Stage 3"],
+            answer: "Stage 1",
+            feedback: "✅ Correct! Stage 1 represents a balance of high birth and death rates."
+          },
+          {
+            question: "2. What marks the beginning of Stage 2 in the demographic model?",
+            options: ["Falling death rate", "Rising birth rate", "Increasing migration"],
+            answer: "Falling death rate",
+            feedback: "✅ Correct! The decline in death rates marks Stage 2."
+          },
+          {
+            question: "3. What characterizes Stage 5?",
+            options: ["Natural decrease in population", "Population explosion", "High death rate"],
+            answer: "Natural decrease in population",
+            feedback: "✅ Correct! Stage 5 is marked by birth rates falling below death rates."
+          },
+          {
+            question: "4. Which stage shows rapidly declining birth rates?",
+            options: ["Stage 3", "Stage 1", "Stage 5"],
+            answer: "Stage 3",
+            feedback: "✅ Correct! Stage 3 is known for a rapid decline in birth rates."
+          },
+          {
+            question: "5. In which stage is population growth the fastest?",
+            options: ["Stage 2", "Stage 4", "Stage 1"],
+            answer: "Stage 2",
+            feedback: "✅ Correct! The gap between birth and death rates is widest in Stage 2."
+          },
+          {
+            question: "6. What is a key cause of death rate drop in Stage 2?",
+            options: ["Improvements in sanitation and medicine", "Increased fertility", "Urban sprawl"],
+            answer: "Improvements in sanitation and medicine",
+            feedback: "✅ Correct! These improvements reduce mortality significantly."
+          },
+          {
+            question: "7. What trend is typical of Stage 4?",
+            options: ["Low birth and death rates", "High natural increase", "High death rate"],
+            answer: "Low birth and death rates",
+            feedback: "✅ Correct! Stage 4 features stable and low fertility and mortality."
+          },
+          {
+            question: "8. What is the significance of population aging in Stage 4?",
+            options: ["Increased elder care needs", "Population doubling", "Rising death rate"],
+            answer: "Increased elder care needs",
+            feedback: "✅ Correct! Aging populations require more care services."
+          },
+          {
+            question: "9. Which stage often includes high immigration?",
+            options: ["Stage 5", "Stage 3", "Stage 1"],
+            answer: "Stage 5",
+            feedback: "✅ Correct! Immigration often offsets natural decrease in Stage 5."
+          },
+          {
+            question: "10. Which country is most likely in Stage 5?",
+            options: ["Japan", "Nigeria", "India"],
+            answer: "Japan",
+            feedback: "✅ Correct! Japan is experiencing Stage 5 trends."
+          }
+        ];
+      
+        let quizScore = 0;
+        let answered = {};
+      
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; // Clear
+
+            showQuestion(0); // Start with the first question
+            }
+
+            let currentQuestion = 0;
+
+        function showQuestion(index) {
+        const container = document.getElementById('quiz-container');
+        const q = quizQuestions[index];
+
+        if (!q) return;
+
+        container.innerHTML = `
+            <div class="quiz-question" id="question${index + 1}">
+            <p><strong>${q.question}</strong></p>
+            ${q.options.map(opt => `
+                <label>
+                <input type="radio" name="q${index + 1}" value="${opt}" onclick="checkSequentialAnswer(${index}, this.value)">
+                ${opt}
+                </label>
+            `).join('')}
+            <p class="feedback" id="feedback${index + 1}"></p>
+            </div>
+        `;
+        }
+
+        function checkSequentialAnswer(index, selectedValue) {
+  const q = quizQuestions[index];
+  const feedbackEl = document.getElementById(`feedback${index + 1}`);  
+  const scoreEl = document.getElementById('quizScore');
+  const confetti = document.getElementById('confetti');
+
+  if (selectedValue === q.answer) {
+    if (!answered[index + 1]) {
+      quizScore++;
+      answered[index + 1] = true;
+      document.getElementById('progressCount').innerText = quizScore;
+    }
+    feedbackEl.innerText = q.feedback;
+    feedbackEl.style.color = '#2e7d32';
+
+    // Show next question after a short delay
+    setTimeout(() => {
+      currentQuestion++;
+      if (currentQuestion < quizQuestions.length) {
+        showQuestion(currentQuestion);
+      } else {
+        document.getElementById('quiz-container').innerHTML = '';
+        scoreEl.innerText = `Your score: ${quizScore} / ${quizQuestions.length}`;
+        confetti.style.display = 'block';
+      }
+    }, 800);
+  } else {
+    feedbackEl.innerText = "❌ Not quite. Try again!";
+    feedbackEl.style.color = '#d32f2f';
+  }
+}
+
+      
+        function resetQuiz() {
+          quizScore = 0;
+          answered = {};
+          document.getElementById('quizScore').innerText = '';
+          document.getElementById('confetti').style.display = 'none';
+          renderQuiz();
+        }
+      
+        // Load quiz on page load
+        window.onload = renderQuiz;
+      </script>
+      
+    
